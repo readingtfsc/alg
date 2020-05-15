@@ -5,21 +5,23 @@ import java.util.HashMap;
 public class HashDoubleLinkListDemo {
     public static void main(String[] args) {
         DoubleLinkedList list = new DoubleLinkedList();
-        list.addFirst(new Node(1,"1"));
+        list.addFirst(new Node(1, "1"));
         int size = list.size();
         System.out.println(size);
 
 
         LRUCache cache = new LRUCache(3);
-        cache.put(new Node(1,"1"));
-        cache.put(new Node(2,"2"));
-        cache.put(new Node(3,"3"));
-        cache.put(new Node(4,"4"));
-        cache.put(new Node(5,"5"));
+        cache.put(new Node(1, "1"));
+        cache.put(new Node(2, "2"));
+        cache.get(1);
+        cache.put(new Node(3, "3"));
+        cache.get(1);
+        cache.put(new Node(4, "4"));
+        cache.put(new Node(5, "5"));
         Node n = cache.get(5);
-        System.out.println(n.key+n.value);
+        System.out.println(n.key + n.value);
         Node n1 = cache.get(1);
-        System.out.println(n1.key+n1.value);
+        System.out.println(n1.key + n1.value);
     }
 }
 
@@ -44,6 +46,7 @@ class DoubleLinkedList {
     // 在链表头部添加节点 x
     public void addFirst(Node x) {
         x.next = head.next;
+        x.prev = head;
         head.next = x;
     }
 
@@ -62,9 +65,10 @@ class DoubleLinkedList {
             temp = temp.next;
         }
 
-        if (flag){
-          //  temp.prev.next = temp.next;
-            if (temp.next!=null){
+        if (flag) {
+            temp.prev.next = temp.next;
+
+            if (temp.next != null) {
                 temp.next.prev = temp.prev;
             }
         }
@@ -79,7 +83,7 @@ class DoubleLinkedList {
         Node temp = head.next;
         while (true) {
             if (temp.next == null) {
-               Node t = temp;
+                Node t = temp;
                 temp = null;
                 return t;
             }
@@ -104,7 +108,7 @@ class DoubleLinkedList {
 
     // 返回链表长度
     public int size() {
-        int size =0;
+        int size = 0;
         Node temp = head;
         while (true) {
             if (temp.next == null) {
