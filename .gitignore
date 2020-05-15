@@ -1,0 +1,14 @@
+
+llj-admin-server.exe~
+lastupdate.tmp
+
+.idea
+*.exe
+*.tmp
+*.log
+*.bat
+*.cmd
+*.zip
+/out
+alg.iml
+.idea/
